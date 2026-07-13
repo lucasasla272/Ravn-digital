@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ravn Digital — Webs para bares y restaurantes de Barcelona</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --color-bg: #0a0a0a;
+            --color-text: #f5f0e8;
+            --color-accent: #c9a96e;
+            --color-accent-dark: #a08050;
+            --color-muted: #888;
+            --color-card: #141414;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+        }
+
+        /* NAV */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: rgba(10, 10, 10, 0.9);
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--color-text);
+            letter-spacing: 2px;
+        }
+
+        .logo span {
+            color: var(--color-accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--color-text);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 400;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--color-accent);
+        }
+
+        /* HERO */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 2rem;
+            position: relative;
+            background: linear-gradient(180deg, rgba(10,10,10,0.3) 0%, rgba(10,10,10,0.8) 100%), 
+                        url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1920&q=80') center/cover;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            max-width: 900px;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--color-muted);
+            max-width: 600px;
+            margin-bottom: 2.5rem;
+            font-weight: 300;
+        }
+
+        .cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--color-accent);
+            color: var(--color-bg);
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s;
+            border: 2px solid var(--color-accent);
+        }
+
+        .cta-btn:hover {
+            background: transparent;
+            color: var(--color-accent);
+        }
+
+        .cta-btn.secondary {
+            background: transparent;
+            color: var(--color-text);
+            border-color: var(--color-muted);
+            margin-left: 1rem;
+        }
+
+        .cta-btn.secondary:hover {
+            border-color: var(--color-accent);
+            color: var(--color-accent);
+        }
+
+        /* SECTIONS */
+        section {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            color: var(--color-muted);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* PROBLEMA */
+        .problems {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .problem-card {
+            background: var(--color-card);
+            padding: 2.5rem;
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .problem-card .icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .problem-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.75rem;
+            color: var(--color-text);
+        }
+
+        .problem-card p {
+            color: var(--color-muted);
+            font-size: 0.95rem;
+        }
+
+        /* SOLUCIÓN */
+        .solution {
+            background: var(--color-card);
+            border-radius: 24px;
+            padding: 4rem;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .solution h2 {
+            font-size: clamp(1.8rem, 3vw, 2.5rem);
+            margin-bottom: 1rem;
+        }
+
+        .solution .price {
+            font-size: 4rem;
+            font-family: 'Playfair Display', serif;
+            color: var(--color-accent);
+            margin: 1.5rem 0;
+        }
+
+        .solution .price span {
+            font-size: 1.2rem;
+            color: var(--color-muted);
+            font-family: 'Inter', sans-serif;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+            text-align: left;
+        }
+
+        .feature {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .feature .check {
+            color: var(--color-accent);
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .feature div h4 {
+            font-size: 1rem;
+            margin-bottom: 0.25rem;
+            font-weight: 600;
+        }
+
+        .feature div p {
+            color: var(--color-muted);
+            font-size: 0.9rem;
+        }
+
+        /* EJEMPLOS */
+        .examples {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .example-card {
+            background: var(--color-card);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: transform 0.3s;
+        }
+
+        .example-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .example-card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+        }
+
+        .example-card .content {
+            padding: 1.5rem;
+        }
+
+        .example-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .example-card p {
+            color: var(--color-muted);
+            font-size: 0.9rem;
+        }
+
+        /* PROCESO */
+        .steps {
+            display: flex;
+            justify-content: space-between;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .step {
+            flex: 1;
+            min-width: 250px;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--color-accent);
+            color: var(--color-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0 auto 1.5rem;
+        }
+
+        .step h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .step p {
+            color: var(--color-muted);
+            font-size: 0.9rem;
+        }
+
+        /* CTA FINAL */
+        .final-cta {
+            text-align: center;
+            padding: 6rem 2rem;
+            background: linear-gradient(180deg, var(--color-bg) 0%, #141414 100%);
+        }
+
+        .final-cta h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: 1rem;
+        }
+
+        .final-cta p {
+            color: var(--color-muted);
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .whatsapp-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: #25D366;
+            color: white;
+            padding: 1.2rem 3rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+        }
+
+        .whatsapp-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 40px rgba(37, 211, 102, 0.3);
+        }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            color: var(--color-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        footer a {
+            color: var(--color-accent);
+            text-decoration: none;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem 1.5rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .solution {
+                padding: 2rem;
+            }
+            
+            .steps {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAV -->
+    <nav>
+        <div class="logo">RAVN <span>DIGITAL</span></div>
+        <ul class="nav-links">
+            <li><a href="#solucion">Servicio</a></li>
+            <li><a href="#ejemplos">Ejemplos</a></li>
+            <li><a href="#proceso">Cómo funciona</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+        </ul>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+        <h1>Tu bar merece una web que venda</h1>
+        <p>Webs modernas, carta digital con QR y reservas por WhatsApp para bares y restaurantes de Barcelona. En 48 horas, desde 199€.</p>
+        <div>
+            <a href="https://wa.me/34692872506?text=Hola%20Lucas,%20vi%20tu%20web%20y%20quiero%20saber%20más%20sobre%20la%20web%20para%20mi%20bar." class="cta-btn" target="_blank">💬 Hablar por WhatsApp</a>
+            <a href="#solucion" class="cta-btn secondary">Ver qué incluye</a>
+        </div>
+    </section>
+
+    <!-- PROBLEMA -->
+    <section id="problema">
+        <div class="section-header">
+            <h2>¿Te suena familiar?</h2>
+            <p>La mayoría de bares en Barcelona aún no aprovechan el potencial digital</p>
+        </div>
+        <div class="problems">
+            <div class="problem-card">
+                <div class="icon">📱</div>
+                <h3>No tienes web o está desactualizada</h3>
+                <p>Tus clientes buscan tu bar en Google y no encuentran nada, o encuentran una página de los años 2000 que no funciona en móvil.</p>
+            </div>
+            <div class="problem-card">
+                <div class="icon">📋</div>
+                <h3>La carta es un PDF difícil de leer</h3>
+                <p>Los clientes tienen que descargar un PDF, hacer zoom, y no pueden ver fotos. Pierdes ventas antes de que lleguen.</p>
+            </div>
+            <div class="problem-card">
+                <div class="icon">⏰</div>
+                <h3>Pierdes tiempo en mensajes de WhatsApp</h3>
+                <p>Respondes a las mismas preguntas todos los días: horarios, precios, disponibilidad. Tiempo que podrías dedicar a tu negocio.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SOLUCIÓN -->
+    <section id="solucion">
+        <div class="solution">
+            <h2>Todo lo que tu bar necesita, en un solo paquete</h2>
+            <div class="price">199€ <span>todo incluido</span></div>
+            <p style="color: var(--color-muted); margin-bottom: 2rem;">Web profesional lista en 48 horas. Sin sorpresas, sin cuotas mensuales ocultas.</p>
+            
+            <div class="features">
+                <div class="feature">
+                    <span class="check">✓</span>
+                    <div>
+                        <h4>Web moderna y responsive</h4>
+                        <p>Se ve perfecta en móvil, tablet y ordenador. Colores, tipografía y fotos que reflejan la esencia de tu bar.</p>
+                    </div>
+                </div>
+                <div class="feature">
+                    <span class="check">✓</span>
+                    <div>
+                        <h4>Carta digital con QR</h4>
+                        <p>Tus clientes escanean el código y ven la carta en su móvil, con fotos y precios actualizados. Sin PDFs.</p>
+                    </div>
+                </div>
+                <div class="feature">
+                    <span class="check">✓</span>
+                    <div>
+                        <h4>Botón de WhatsApp para reservas</h4>
+                        <p>Un solo click y tus clientes te escriben por WhatsApp para reservar mesa o hacer pedidos.</p>
+                    </div>
+                </div>
+                <div class="feature">
+                    <span class="check">✓</span>
+                    <div>
+                        <h4>Google Maps integrado</h4>
+                        <p>Tus clientes te encuentran fácilmente y ven horarios, dirección y cómo llegar.</p>
+                    </div>
+                </div>
+                <div class="feature">
+                    <span class="check">✓</span>
+                    <div>
+                        <h4>Fotos optimizadas</h4>
+                        <p>Tus platos y tu local se ven irresistibles. Fotos de alta calidad, cargan rápido y se ven genial.</p>
+                    </div>
+                </div>
+                <div class="feature">
+                    <span class="check">✓</span>
+                    <div>
+                        <h4>Dominio + hosting incluidos</h4>
+                        <p>Configuro todo por ti. No tienes que preocuparte de nada técnico. Funciona desde el primer día.</p>
+                    </div>
+                </div>
+            </div>
+
+            <a href="https://wa.me/34692872506?text=Hola%20Lucas,%20me%20interesa%20el%20paquete%20de%20199€%20para%20mi%20bar." class="cta-btn" target="_blank" style="font-size: 1.1rem; padding: 1.2rem 3rem;">Quiero mi web →</a>
+        </div>
+    </section>
+
+    <!-- EJEMPLOS -->
+    <section id="ejemplos">
+        <div class="section-header">
+            <h2>Así quedaría tu bar</h2>
+            <p>Diseños inspirados en webs que realmente funcionan, como Messié Pizza</p>
+        </div>
+        <div class="examples">
+            <div class="example-card">
+                <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=600&q=80" alt="Bar moderno">
+                <div class="content">
+                    <h3>Bar El Rincón</h3>
+                    <p>Web de una página con fotos grandes, carta digital y reservas por WhatsApp. Cargado en 48h.</p>
+                </div>
+            </div>
+            <div class="example-card">
+                <img src="https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=600&q=80" alt="Restaurante elegante">
+                <div class="content">
+                    <h3>La Terraza</h3>
+                    <p>Diseño elegante con tipografía serif, colores cálidos y secciones claras. Inspirado en Messié Pizza.</p>
+                </div>
+            </div>
+            <div class="example-card">
+                <img src="https://images.unsplash.com/photo-1552566626-52f8b828add9?w=600&q=80" alt="Pizzería">
+                <div class="content">
+                    <h3>Pizzería Napoli</h3>
+                    <p>Estilo oscuro con acentos dorados, fotos de platos destacadas y botón de WhatsApp prominente.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROCESO -->
+    <section id="proceso">
+        <div class="section-header">
+            <h2>¿Cómo funciona?</h2>
+            <p>Tres pasos y tu bar tiene web nueva</p>
+        </div>
+        <div class="steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <h3>Me escribes por WhatsApp</h3>
+                <p>Me cuentas sobre tu bar, me envías fotos y la carta. En 10 minutos tengo todo lo que necesito.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <h3>Te muestro el diseño</h3>
+                <p>En 24h te envío una preview de cómo quedaría tu web. Haces los cambios que quieras, sin límite.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <h3>Web online en 48h</h3>
+                <p>Publico tu web con dominio, hosting y todo configurado. Listo para que tus clientes te encuentren.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA FINAL -->
+    <section class="final-cta" id="contacto">
+        <h2>Tu bar no puede esperar más</h2>
+        <p>Cada día sin web moderna es un cliente que va a la competencia. Empecemos hoy.</p>
+        <a href="https://wa.me/34692872506?text=Hola%20Lucas,%20vi%20tu%20web%20y%20quiero%20saber%20más%20sobre%20la%20web%20para%20mi%20bar." class="whatsapp-btn" target="_blank">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Escríbeme por WhatsApp
+        </a>
+        <p style="margin-top: 1.5rem; color: var(--color-muted); font-size: 0.9rem;">Respondo en menos de 1 hora · Barcelona</p>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p><strong>Ravn Digital</strong> — Webs para bares y restaurantes de Barcelona</p>
+        <p style="margin-top: 0.5rem;">Hecho con ❤️ en Barcelona · <a href="https://wa.me/34692872506">+34 692 872 506</a></p>
+    </footer>
+
+</body>
+</html>
